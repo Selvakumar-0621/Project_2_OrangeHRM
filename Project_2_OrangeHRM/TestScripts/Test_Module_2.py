@@ -1,7 +1,9 @@
 from PageObjects.Module_2 import Module2
 
+#Global setup to initialize Homepage instance
 module2 = Module2()
 self = module2.driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+
 
 #Test Open URL
 def test_open_url():
