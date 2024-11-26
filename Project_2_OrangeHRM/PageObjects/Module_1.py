@@ -7,11 +7,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
+# Data class to store application-specific data such as URLs and credentials.
 class Data1:
     url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
     username = "Admin"
     password = "admin123"
 
+
+# Locators class to store element locators for the application.
 class Locators1:
     username_locator = (By.NAME, "username")
     password_locator = (By.NAME, "password")
@@ -22,6 +26,7 @@ class Locators1:
                     "Maintenance", "Buzz"]
 
 
+# Main class to define methods for interacting with the Webpage.
 class Module1(Data1, Locators1):
     def __init__(self):
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -30,7 +35,7 @@ class Module1(Data1, Locators1):
         self.driver.implicitly_wait(10)
         self.wait = WebDriverWait(self.driver, 10)
 
-
+    #Method to open URL in the browser.
     def open_url(self):
         self.driver.get(self.url)
         print(f"Opened URL: {self.driver.current_url}")
@@ -40,7 +45,7 @@ class Module1(Data1, Locators1):
         else:
             return False
 
-
+    #Method to login with valid credentials.
     def login(self):
         try:
             username_element = self.wait.until(EC.element_to_be_clickable(self.username_locator))
@@ -58,7 +63,7 @@ class Module1(Data1, Locators1):
         except TimeoutException:
             return False
 
-
+    #Method to Navigate to Admin page.
     def navigate_to_admin(self):
         try:
             admin_element = self.wait.until(EC.element_to_be_clickable(self.admin_locator))
@@ -68,6 +73,8 @@ class Module1(Data1, Locators1):
         except TimeoutException:
             return False
 
+
+    #Method to validate whether the given options are present and enabled in the Admin page.
     def admin_page_options(self):
         missing_options = []
         for option in self.admin_options:
