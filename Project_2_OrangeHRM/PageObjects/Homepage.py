@@ -1,5 +1,3 @@
-from functools import partial
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -8,17 +6,20 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-
+# Data class to store application-specific data (URL and credentials).
 class Data:
     username = "Admin"
     url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
 
+# Locators class to store element locators for the application.
 class Locators:
     forgot_password_locator = (By.XPATH, "//*[@id='app']/div[1]/div/div[1]/div/div[2]/div[2]/form/div[4]/p")
     username_locator = (By.NAME, "username")
     reset_button_locator = (By.XPATH, "//button[@type='submit']")
     success_message_locator = (By.XPATH, "//*[@id='app']/div[1]/div[1]/div/form/div[2]/button[2]")
 
+
+# Homepage class to define methods for interacting with the webapp.
 class Homepage(Data, Locators):
     def __init__(self):
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -27,6 +28,7 @@ class Homepage(Data, Locators):
         self.driver.implicitly_wait(10)
         self.wait = WebDriverWait(self.driver, 10)
 
+    #Method to get URL opened in browser
     def open_url(self):
         self.driver.get(self.url)
         print(f"Opened URL: {self.driver.current_url}")
@@ -35,7 +37,7 @@ class Homepage(Data, Locators):
         else:
             return False
 
-
+    #Method to click forgot password link.
     def click_forgot_password(self):
         try:
             forgot_password_element = self.wait.until(EC.element_to_be_clickable(self.forgot_password_locator))
@@ -46,7 +48,7 @@ class Homepage(Data, Locators):
             print("Forgot Password link not found")
             return False
 
-
+    #Method to click reset password button.
     def reset_password(self):
         try:
             username_element = self.wait.until(EC.element_to_be_clickable(self.username_locator))
