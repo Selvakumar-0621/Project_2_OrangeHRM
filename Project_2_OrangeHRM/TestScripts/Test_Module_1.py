@@ -1,5 +1,6 @@
 from PageObjects.Module_1 import Module1
 
+#Global setup to initialize Homepage instance
 module1 = Module1()
 
 self = module1.driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
@@ -28,13 +29,4 @@ def test_admin_page_options():
     assert module1.admin_page_options() == True
     print("Test Admin Page options - Passed")
     module1.quit()
-
-
-    
-
-
-
-
-
-
 
