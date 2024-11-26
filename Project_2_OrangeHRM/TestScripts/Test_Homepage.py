@@ -1,6 +1,7 @@
 
 from PageObjects.Homepage import Homepage
 
+#Global setup to initialize Homepage instance
 homepage = Homepage()
 
 self = homepage.driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
